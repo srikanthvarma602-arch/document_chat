@@ -7,7 +7,9 @@ authors = [
     { name = "Varma602", email = "srikanthvarma449@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "structlog>=26.1.0",
+]
 
 [project.scripts]
 document-chat = "document_chat:main"
