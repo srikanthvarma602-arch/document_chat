@@ -1,13 +1,25 @@
+from ..logger import GLOBAL_LOGGER as log
+
 from  src.document_chat.logger.custom_logger import CustomLogger
+from src.document_chat.exception.custom_exception import CustomerExpection
+import sys
 import logging
 
-logobj=CustomLogger()
-logger=logobj.get_logger(__file__)
+# logobj=CustomLogger()
+# logger=logobj.get_logger(__file__)
 
 def add(a,b):
-    logger.info("Start:add function started")
-    sum=a+b
-    logger.info("End: add function started")
+    log.info("Start:add function started")
+    try:
+        a=90/0
+        print(a)
+    except Exception as e:
+        #exceptObj=CustomerExpection(ex,sys)
+        logging.error(e)
+        raise CustomerExpection("Division failed", sys)
+
+
+    log.info("End: add function started")
     return sum
 
 if __name__=="__main__":

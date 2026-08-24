@@ -1,11 +1,7 @@
-Start:add function started
-End: add function started
-Start:add function started
-End: add function started
-Start:add function started
-End: add function started
-i am customer logger bro
-Start:add function started
-End: add function started
-{"timestamp": "2026-08-24T03:17:12.934728Z", "level": "info", "event": "Start:add function started"}
-{"timestamp": "2026-08-24T03:17:12.934964Z", "level": "info", "event": "End: add function started"}
+{"timestamp": "2026-08-24T05:33:36.049990Z", "level": "info", "event": "Start:add function started"}
+division by zero
+{"timestamp": "2026-08-24T05:33:36.050397Z", "level": "info", "event": "End: add function started"}
+{"timestamp": "2026-08-24T05:34:26.759616Z", "level": "info", "event": "Start:add function started"}
+division by zero
+{"timestamp": "2026-08-24T05:34:45.256721Z", "level": "info", "event": "Start:add function started"}
+division by zero
