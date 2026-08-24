@@ -2,3 +2,10 @@ Start:add function started
 End: add function started
 Start:add function started
 End: add function started
+Start:add function started
+End: add function started
+i am customer logger bro
+Start:add function started
+End: add function started
+{"timestamp": "2026-08-24T03:17:12.934728Z", "level": "info", "event": "Start:add function started"}
+{"timestamp": "2026-08-24T03:17:12.934964Z", "level": "info", "event": "End: add function started"}
