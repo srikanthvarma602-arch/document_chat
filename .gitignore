@@ -2,3 +2,5 @@
 .env
 
 logs/
+src/document_chat/utils/__pycache__/
+

@@ -1,5 +1,7 @@
 from pathlib import Path
 from typing import Iterable,List
+
+from fastapi import UploadFile
 from src.document_chat.logger import GLOBAL_LOGGER as log
 from src.document_chat.exception.custom_exception import CustomerExpection
 import re,uuid,sys
@@ -55,9 +57,13 @@ def load_documents(paths=Iterable[Path]):
         raise CustomerExpection("Error loading documents",str(e))
         
 
-   
+class FastApiFileAdapter:
+    def __init__(self,uf:UploadFile):
+        self.uf=uf
+        self.name=uf.filename
+    def getbuffer(self):
+        self.uf.file.seek(0)
+        return self.uf.file.read()
 
-
-
-if __name__=="__main__":
-    save_upload_files()
+# if __name__=="__main__":
+#     save_upload_files()

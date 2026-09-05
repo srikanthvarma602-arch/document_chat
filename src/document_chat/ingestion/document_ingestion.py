@@ -4,6 +4,7 @@ from src.document_chat.logger import GLOBAL_LOGGER as log
 from src.document_chat.utils.model_loader import ModelLoader
 from langchain_qdrant import QdrantVectorStore
 from src.document_chat.exception.custom_exception import CustomerExpection
+
 class DocumentIngestion:
     def __init__(self):        
         self.model_loader=ModelLoader()
@@ -48,8 +49,6 @@ class DocumentIngestion:
             log.error("Failed retriever")
             raise CustomerExpection("Error creating retriever",str(e))     
        
-
-        pass
 
 
 
