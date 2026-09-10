@@ -3,8 +3,8 @@ from typing import List
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 
-from src.document_chat.retrieval.retrieval import ConversionalRAG
-from src.document_chat.ingestion.document_ingestion import DocumentIngestion
+from document_chat.retrieval.retrieval import ConversionalRAG
+from document_chat.ingestion.document_ingestion import DocumentIngestion
 from src.document_chat.utils.file_ops import FastApiFileAdapter
 from dotenv import load_dotenv
 from src.document_chat.logger import GLOBAL_LOGGER as log
@@ -27,7 +27,7 @@ async def chat_index(files:List[UploadFile]=File(...),
         log.info("document ingestion started...")
         warpped=[FastApiFileAdapter(file) for file in files]
         docIngestion=DocumentIngestion()
-        docIngestion.insertvectordb(warpped,uploadFilePath,chunk_size,chunk_overlap)
+        docIngestion.insertvectordb(warpped,uploadFilePath,int(chunk_size),int(chunk_overlap))
         log.info("Doucment ingestion completed")
         return {"Response":"Document ingestion completed successfully"}
         

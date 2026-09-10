@@ -22,7 +22,7 @@ class DocumentIngestion:
     def _strorevectordb(self,chunks)->QdrantVectorStore:
         try:
             embedd_model=self.model_loader.load_embedding()
-            vectorstrore=QdrantVectorStore.add_documents(
+            vectorstrore=QdrantVectorStore.from_documents(
             document=chunks,
                     embedding=embedd_model,
                     path="qdrant",
@@ -31,7 +31,7 @@ class DocumentIngestion:
             log.info("vectorstrore succssfully")
             return vectorstrore
         except Exception as e:
-            log.error("Failed Qdrant vector stroe")
+            log.error("Failed Qdrant vector stroe",error=str(e))
             raise CustomerExpection("Error failed Qdrant vector",str(e))    
       
     def insertvectordb(self,uploadfiles,path,chunksize,chunkoverlap):
@@ -46,7 +46,7 @@ class DocumentIngestion:
             # return vectorstroe.as_retriever(search_args={"k":5})
             # return retriver
         except Exception as e:
-            log.error("Failed retriever")
+            log.error("Failed retriever",error=str(e))
             raise CustomerExpection("Error creating retriever",str(e))     
        
 

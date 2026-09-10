@@ -9,9 +9,10 @@ from langchain_community.document_loaders import PyPDFLoader,TextLoader,Docx2txt
 
 SUPPORT_EXTENTION={".pdf",".txt",".docx"}
 
-def save_upload_files(uploadfiles:Iterable,targetpath:Path):
+def save_upload_files(uploadfiles:Iterable,targetdir:Path):
     try:
-        targetpath.mkdir(exist_ok=True)
+        targetdir=Path(targetdir)
+        targetdir.mkdir(exist_ok=True)
         saved:List[Path]=[]
         for uf in uploadfiles:
             name=getattr(uf,"name","file.pdf")
@@ -21,7 +22,7 @@ def save_upload_files(uploadfiles:Iterable,targetpath:Path):
                 continue
             safe_name=re.sub(r'[<>:"/\\|?*]', '_', re.sub(r'\s+', '_', Path(name).stem)).strip(' ._')
             filename=f"{safe_name}_{uuid.uuid4().hex[:6]}{exit}"
-            out=targetpath/filename
+            out=targetdir/filename
 
             with open(out,"wb") as f:
                 if hasattr(uf,"read"):
@@ -31,7 +32,7 @@ def save_upload_files(uploadfiles:Iterable,targetpath:Path):
             saved.append(out)
             return saved 
     except Exception as e:
-        log.error("failed to load file",error=str(e),dir=str(targetpath))
+        log.error("failed to load file",error=str(e),dir=str(targetdir))
         raise CustomerExpection("failed to load file",sys)
 
 def load_documents(paths=Iterable[Path]):
@@ -48,12 +49,12 @@ def load_documents(paths=Iterable[Path]):
                 loader=Docx2txtLoader(str(p))
             else:
                 log.warring("unsupported extension file",path=str(p))
-            docs.extend(loader.load)
+            docs.extend(loader.load())
         log.info("document successfully loaded",count=len(docs))
         return docs
         pass
     except Exception as e:
-        log.error("failed loading the documents",str(e))
+        log.error("failed loading the documents",error=str(e))
         raise CustomerExpection("Error loading documents",str(e))
         
 
@@ -65,5 +66,10 @@ class FastApiFileAdapter:
         self.uf.file.seek(0)
         return self.uf.file.read()
 
-# if __name__=="__main__":
-#     save_upload_files()
+if __name__=="__main__":
+    try:
+        save_upload_files()
+    except Exception as e:
+        log.error("Custom expection",error=str(e))
+
+    
